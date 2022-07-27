@@ -1,6 +1,5 @@
 from entity.api_info import *
 import random
-from foREST_setting import foRESTSettings
 
 
 class SwaggerParser:

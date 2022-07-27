@@ -59,9 +59,9 @@ sudo docker pull mysql
 sudo npm install -g dredd
 
 # Install EvoMaster 1.3.0
-wget https://github.com/EMResearch/EvoMaster/releases/download/v1.3.0/evomaster.jar.zip
+
 unzip evomaster.jar.zip
-rm evomaster.jar.zip
+
 
 # Install Schemathesis 3.11.6
 . ./venv/bin/activate && pip install schemathesis

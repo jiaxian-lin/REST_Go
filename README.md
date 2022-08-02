@@ -109,7 +109,7 @@ Before run the script, make sure that you use the `virtualenv`.
 Also, we need to check if there is already running session. You can check the running sessions using "tmux ls" command. If there is running session, you may want to kill the session before running new experiment.
 You can kill the session with "tmux kill-sess -t {session name}." You should find the session name in "tmux ls" command if there is any.
 ```
-python3 run_tool.py {tool_name} {service_name} {time_limit}
+python3 run_tool.py {tool_name} {service_name} {port}
 ```
 
 ### Generate a report.

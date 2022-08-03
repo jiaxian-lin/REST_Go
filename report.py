@@ -126,7 +126,7 @@ c_method = [0, 0, 0, 0, 0, 0]
 error = 0
 unique_err = 0
 crucial = 0
-mypath = os.path.join(curdir, "data/" + services[k])
+mypath = os.path.join(curdir)
 if os.path.isdir(mypath):
     onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
     for dir_file in onlyfiles:
@@ -253,17 +253,17 @@ if os.path.isdir(mypath):
                     crucial = crucial + 1
 res = ""
 
-for k in range(6):
-    if t_line[k] != 0:
-        line = c_line[k]/t_line[k]
+for i in range(6):
+    if t_line[i] != 0:
+        line = c_line[i]/t_line[i]
     else:
         line = 0
-    if t_branch[k] != 0:
-        branch = c_branch[k]/t_branch[k]
+    if t_branch[i] != 0:
+        branch = c_branch[i]/t_branch[i]
     else:
         branch = 0
-    if t_method[k] != 0:
-        method = c_method[k]/t_method[k]
+    if t_method[i] != 0:
+        method = c_method[i]/t_method[i]
     else:
         method = 0
     res = res + str(line*100) + '%,' + str(branch*100) + '%,' + str(method*100) + '%\n'

@@ -5,20 +5,20 @@ import subprocess
 
 
 def whitebox(port):
-    timeout = time.time() + 60 * 60 * int(time_limit)
+    timeout = time.time() + 60 * 60 * float(time_limit)
     while time.time() < timeout:
         subprocess.run("rm -rf " + service, shell=True)
-        subprocess.run("java -jar evomaster.jar --sutControllerPort " + str(port) + " --maxTime " + time_limit + "h --outputFolder " + service, shell=True)
+        subprocess.run("java -jar evomaster.jar --sutControllerPort " + str(port) + " --maxTime " + str(int(float(time_limit)*60)) + "h --outputFolder " + service, shell=True)
 
 
 def blackbox(swagger, port):
-    timeout = time.time() + 60 * 60 * int(time_limit)
+    timeout = time.time() + 60 * 60 * float(time_limit)
     while time.time() < timeout:
         if tool == "dredd":
             subprocess.run("dredd " + swagger + ' http://localhost:' + str(port), shell=True)
         elif tool == "evomaster-blackbox":
             subprocess.run("rm -rf " + service, shell=True)
-            subprocess.run("java -jar evomaster.jar --blackBox true --bbSwaggerUrl " + swagger + " --bbTargetUrl http://localhost:" + str(port) + " --outputFormat JAVA_JUNIT_4 --maxTime " + time_limit + "h --outputFolder " + service, shell=True)
+            subprocess.run("java -jar evomaster.jar --blackBox true --bbSwaggerUrl " + swagger + " --bbTargetUrl http://localhost:" + str(port) + " --outputFormat JAVA_JUNIT_4 --maxTime " + str(int(float(time_limit)*60)) + "m --outputFolder " + service, shell=True)
         elif tool == "restler":
             basedir = os.path.join(curdir, "restler_" + service)
             restler_home = os.path.join(curdir, "restler/restler_bin/restler/Restler.dll")
@@ -49,12 +49,15 @@ def blackbox(swagger, port):
             subprocess.run("cd tcases_" + service + " && mvn clean test", shell=True)
         elif tool == "apifuzzer":
             subprocess.run("APIFuzzer -s " + swagger + " -u http://localhost:" + str(port), shell=True)
+        elif tool == "foREST":
+            cmod = r"python3 foREST/foREST.py --time_budget "+str(time_limit)+ " --api_file_path " + swagger + r" --settings_file foREST/setting.json --out_put " +service
+            subprocess.run(cmod, shell=True)
 
 if __name__ == "__main__":
     tool = sys.argv[1]
     service = sys.argv[2]
     port = sys.argv[3]
-    time_limit = "1"
+    time_limit = sys.argv[4]
 
     curdir = os.getcwd()
 

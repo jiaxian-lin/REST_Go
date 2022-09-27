@@ -1,8 +1,8 @@
 """ Global monitor for the fuzzing run """
 import json
-from ...log.get_logging import foREST_log
-from time_monitor import TimeMonitor
-from ...foREST_setting import foRESTSettings
+from log.get_logging import foREST_log
+from module.foREST_monitor.time_monitor import TimeMonitor
+from foREST_setting import foRESTSettings
 
 
 class foRESTMonitor(object):
@@ -17,7 +17,7 @@ class foRESTMonitor(object):
 
         """
         if foRESTMonitor.__instance is None:
-            raise Exception("foREST Monitor not yet initialized.")
+            raise Exception("restler Monitor not yet initialized.")
         return foRESTMonitor.__instance
 
     def __init__(self):

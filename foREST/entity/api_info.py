@@ -59,7 +59,7 @@ class DependPoint:
 class FieldInfo:
 
     def __init__(self, field_name, type_, require, location, max_lenth=None, min_lenth=None, default=None,
-                 description=None, enum=None, object=None, array=None, max=None, min=None, format=None):
+                 description=None, enum=None, object=None, array=None, max=None, min=None, format=None, pattern=None):
         self.field_name = field_name
         self.field_type = type_  # int\str\list\object
         self.require = require
@@ -73,10 +73,17 @@ class FieldInfo:
         self.array = array
         self.maximum = max
         self.minimum = min
+        self.pattern = pattern
         self.format = format
         self.depend_list = []  # type: list[DependPoint]
         if self.field_type == 'int' or self.field_type == 'str':
             self.depend_list.append(DependPoint(None, [], 0.5))
+
+    def __repr__(self):
+        if self.field_name:
+            return self.field_name
+        else:
+            return self.field_type
 
     def get_depend(self, api_id, path):
         for depend in self.depend_list:
@@ -119,8 +126,9 @@ def get_param(param_path: list, field_info_list):
 
 class APIInfo:
 
-    def __init__(self, api_id, base_url, path, req_param, resp_param, http_method):
+    def __init__(self, api_id, base_url, path:str, req_param, resp_param, http_method, produces, consumes):
         self.api_id = api_id
+        path = path
         self.identifier = http_method + " " + path
         self.base_url = base_url
         self.path = path
@@ -129,6 +137,11 @@ class APIInfo:
         self.req_param = req_param  # type: list[FieldInfo]
         self.resp_param = resp_param  # type: list[FieldInfo]
         self.http_method = http_method
+        self.produces = produces
+        self.consumes = consumes
+
+    def __repr__(self):
+        return self.identifier
 
     def get_req_param(self, path):
         return get_param(path, self.req_param)

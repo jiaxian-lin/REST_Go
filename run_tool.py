@@ -8,7 +8,7 @@ def whitebox(port):
     timeout = time.time() + 60 * 60 * float(time_limit)
     while time.time() < timeout:
         subprocess.run("rm -rf " + service, shell=True)
-        subprocess.run("java -jar evomaster.jar --sutControllerPort " + str(port) + " --maxTime " + str(int(float(time_limit)*60)) + "h --outputFolder " + service, shell=True)
+        subprocess.run("java -jar evomaster.jar --sutControllerPort " + str(port) + " --maxTime " + str(int(float(time_limit)*60)) + "m --outputFolder EvoMaster_whitebox/" + service, shell=True)
 
 
 def blackbox(swagger, port):
@@ -17,8 +17,10 @@ def blackbox(swagger, port):
         if tool == "dredd":
             subprocess.run("dredd " + swagger + ' http://localhost:' + str(port), shell=True)
         elif tool == "evomaster-blackbox":
-            subprocess.run("rm -rf " + service, shell=True)
-            subprocess.run("java -jar evomaster.jar --blackBox true --bbSwaggerUrl " + swagger + " --bbTargetUrl http://localhost:" + str(port) + " --outputFormat JAVA_JUNIT_4 --maxTime " + str(int(float(time_limit)*60)) + "m --outputFolder " + service, shell=True)
+            subprocess.run("rm -rf EvoMaster/" + service, shell=True)
+            subprocess.run("mkdir EvoMaster/"+service, shell=True)
+            tmp = "java -jar evomaster.jar --blackBox true --bbSwaggerUrl file://" + swagger + " --bbTargetUrl http://localhost:" + str(port) + " --outputFormat JAVA_JUNIT_4 --maxTime " + str(int(float(time_limit)*60)) + "m --outputFolder EvoMaster/" + service
+            subprocess.run(tmp, shell=True)
         elif tool == "restler":
             basedir = os.path.join(curdir, "restler_" + service)
             restler_home = os.path.join(curdir, "restler/restler_bin/restler/Restler.dll")
@@ -72,8 +74,6 @@ if __name__ == "__main__":
     if service == "features-service":
         if tool == "evomaster-whitebox":
             whitebox(40101)
-        elif tool == "evomaster-blackbox":
-            blackbox("https://raw.githubusercontent.com/randomqwerqwer/issta/main/features_swagger.json", 50100)
         elif tool == "bboxrt" or tool == "tcases":
             blackbox(os.path.join(curdir, "doc/features_openapi.yaml"), 50100)
         else:
@@ -81,8 +81,6 @@ if __name__ == "__main__":
     elif service == "languagetool":
         if tool == "evomaster-whitebox":
             whitebox(40100)
-        elif tool == "evomaster-blackbox":
-            blackbox("https://raw.githubusercontent.com/randomqwerqwer/issta/main/languagetool_swagger.json", 50101)
         elif tool == "bboxrt":
             blackbox(os.path.join(curdir, "doc/languagetool_swagger.yaml"), 50101)
         elif tool == "tcases":
@@ -92,8 +90,6 @@ if __name__ == "__main__":
     elif service == "ncs":
         if tool == "evomaster-whitebox":
             whitebox(40102)
-        elif tool == "evomaster-blackbox":
-            blackbox("https://raw.githubusercontent.com/randomqwerqwer/issta/main/ncs_swagger.json", 50102)
         elif tool == "bboxrt":
             blackbox(os.path.join(curdir, "doc/ncs_swagger.yaml"), 50102)
         elif tool == "tcases":
@@ -103,8 +99,6 @@ if __name__ == "__main__":
     elif service == "news":
         if tool == "evomaster-whitebox":
             whitebox(40103)
-        elif tool == "evomaster-blackbox":
-            blackbox("https://raw.githubusercontent.com/randomqwerqwer/issta/main/news_swagger.json", 50103)
         elif tool == "bboxrt":
             blackbox(os.path.join(curdir, "doc/news_swagger.yaml"), 50103)
         elif tool == "tcases":
@@ -114,8 +108,6 @@ if __name__ == "__main__":
     elif service == "ocvn":
         if tool == "evomaster-whitebox":
             whitebox(40104)
-        elif tool == "evomaster-blackbox":
-            blackbox("https://raw.githubusercontent.com/randomqwerqwer/issta/main/ocvn_swagger.json", 50104)
         elif tool == "bboxrt":
             blackbox(os.path.join(curdir, "doc/ocvn_swagger.yaml"), 50104)
         elif tool == "tcases":
@@ -125,8 +117,6 @@ if __name__ == "__main__":
     elif service == "proxyprint":
         if tool == "evomaster-whitebox":
             whitebox(40105)
-        elif tool == "evomaster-blackbox":
-            blackbox("https://raw.githubusercontent.com/randomqwerqwer/issta/main/proxyprint_swagger.json", 50105)
         elif tool == "bboxrt":
             blackbox(os.path.join(curdir, "doc/proxyprint_swagger.yaml"), 50105)
         elif tool == "tcases" or tool == "apifuzzer":
@@ -136,8 +126,6 @@ if __name__ == "__main__":
     elif service == "restcountries":
         if tool == "evomaster-whitebox":
             whitebox(40106)
-        elif tool == "evomaster-blackbox":
-            blackbox("https://raw.githubusercontent.com/randomqwerqwer/issta/main/restcountries_openapi.yaml", "50106")
         elif tool == "apifuzzer":
             blackbox(os.path.join(curdir, "doc/restcountries_openapi.yaml"), "50106")
         else:
@@ -145,8 +133,6 @@ if __name__ == "__main__":
     elif service == "scout-api":
         if tool == "evomaster-whitebox":
             whitebox(40107)
-        elif tool == "evomaster-blackbox":
-            blackbox("https://raw.githubusercontent.com/randomqwerqwer/issta/main/scout_swagger.json", 50107)
         elif tool == "bboxrt":
             blackbox(os.path.join(curdir, "doc/scout_swagger.yaml"), 50107)
         elif tool == "tcases":
@@ -158,8 +144,6 @@ if __name__ == "__main__":
     elif service == "scs":
         if tool == "evomaster-whitebox":
             whitebox(40108)
-        elif tool == "evomaster-blackbox":
-            blackbox("https://raw.githubusercontent.com/randomqwerqwer/issta/main/scs_swagger.json", 50108)
         elif tool == "bboxrt":
             blackbox(os.path.join(curdir, "doc/scs_swagger.yaml"), 50108)
         elif tool == "tcases":
@@ -169,8 +153,6 @@ if __name__ == "__main__":
     elif service == "erc20-rest-service":
         if tool == "evomaster-whitebox":
             whitebox(40109)
-        elif tool == "evomaster-blackbox":
-            blackbox("https://raw.githubusercontent.com/randomqwerqwer/issta/main/erc20_swagger.json", 50109)
         elif tool == "bboxrt" or tool == "tcases":
             blackbox(os.path.join(curdir, "doc/erc20_openapi.yaml"), 50109)
         else:
@@ -178,8 +160,6 @@ if __name__ == "__main__":
     elif service == "genome-nexus":
         if tool == "evomaster-whitebox":
             whitebox(40110)
-        elif tool == "evomaster-blackbox":
-            blackbox("https://raw.githubusercontent.com/randomqwerqwer/issta/main/genome_swagger.json", 50110)
         elif tool == "bboxrt" or tool == "tcases":
             blackbox(os.path.join(curdir, "doc/genome_openapi.yaml"), 50110)
         else:
@@ -187,8 +167,6 @@ if __name__ == "__main__":
     elif service == "person-controller":
         if tool == "evomaster-whitebox":
             whitebox(40111)
-        elif tool == "evomaster-blackbox":
-            blackbox("https://raw.githubusercontent.com/randomqwerqwer/issta/main/person_swagger.json", 50111)
         elif tool == "bboxrt":
             blackbox(os.path.join(curdir, "doc/person_swagger.yaml"), 50111)
         elif tool == "tcases":
@@ -198,8 +176,6 @@ if __name__ == "__main__":
     elif service == "problem-controller":
         if tool == "evomaster-whitebox":
             whitebox(40112)
-        elif tool == "evomaster-blackbox":
-            blackbox("https://raw.githubusercontent.com/randomqwerqwer/issta/main/problem_swagger.json", 50112)
         elif tool == "bboxrt":
             blackbox(os.path.join(curdir, "doc/problem_swagger.yaml"), 50112)
         elif tool == "tcases":
@@ -209,8 +185,6 @@ if __name__ == "__main__":
     elif service == "rest-study":
         if tool == "evomaster-whitebox":
             whitebox(40113)
-        elif tool == "evomaster-blackbox":
-            blackbox("https://raw.githubusercontent.com/randomqwerqwer/issta/main/rest_swagger.json", 50113)
         elif tool == "bboxrt":
             blackbox(os.path.join(curdir, "doc/rest_swagger.yaml"), 50113)
         elif tool == "tcases":
@@ -220,15 +194,11 @@ if __name__ == "__main__":
     elif service == "spring-batch-rest":
         if tool == "evomaster-whitebox":
             whitebox(40114)
-        elif tool == "evomaster-blackbox":
-            blackbox("https://raw.githubusercontent.com/randomqwerqwer/issta/main/springbatch_swagger.json", 50114)
         else:
             blackbox(os.path.join(curdir, "doc/springbatch_openapi.yaml"), 50114)
     elif service == "spring-boot-sample-app":
         if tool == "evomaster-whitebox":
             whitebox(40115)
-        elif tool == "evomaster-blackbox":
-            blackbox("https://raw.githubusercontent.com/randomqwerqwer/issta/main/springboot_swagger.json", 8080)
         elif tool == "bboxrt":
             blackbox(os.path.join(curdir, "doc/springboot_swagger.yaml"), 8080)
         elif tool == "tcases":
@@ -238,8 +208,6 @@ if __name__ == "__main__":
     elif service == "user-management":
         if tool == "evomaster-whitebox":
             whitebox(40116)
-        elif tool == "evomaster-blackbox":
-            blackbox("https://raw.githubusercontent.com/randomqwerqwer/issta/main/user_swagger.json", 50115)
         elif tool == "bboxrt":
             blackbox(os.path.join(curdir, "doc/user_swagger.yaml"), 50115)
         elif tool == "tcases":
@@ -249,8 +217,6 @@ if __name__ == "__main__":
     elif service == "cwa-verification":
         if tool == "evomaster-whitebox":
             whitebox(40117)
-        elif tool == "evomaster-blackbox":
-            blackbox("https://raw.githubusercontent.com/randomqwerqwer/issta/main/cwa_swagger.json", 50116)
         elif tool == "restler":
             blackbox(os.path.join(curdir, "doc/cwa_restler.json"), 50116)
         else:
@@ -258,8 +224,6 @@ if __name__ == "__main__":
     elif service == "market":
         if tool == "evomaster-whitebox":
             whitebox(40118)
-        elif tool == "evomaster-blackbox":
-            blackbox("https://raw.githubusercontent.com/randomqwerqwer/issta/main/market_swagger.json", 50117)
         elif tool == "bboxrt":
             blackbox(os.path.join(curdir, "doc/market_swagger.yaml"), 50117)
         elif tool == "tcases":
@@ -269,8 +233,6 @@ if __name__ == "__main__":
     elif service == "project-tracking-system":
         if tool == "evomaster-whitebox":
             whitebox(40119)
-        elif tool == "evomaster-blackbox":
-            blackbox("https://raw.githubusercontent.com/randomqwerqwer/issta/main/project_swagger.json", 50118)
         elif tool == "bboxrt":
             blackbox(os.path.join(curdir, "doc/project_swagger.yaml"), 50118)
         elif tool == "tcases" or tool == "apifuzzer":
@@ -281,5 +243,5 @@ if __name__ == "__main__":
     print(
         "Experiments are done. We are safely closing the service now. If you want to run more, please check if there is unclosed session. You can check it with 'tmux ls' command. To close the session, you can run 'tmux kill-sess -t {session name}'")
 
-    time.sleep(180)
+    time.sleep(60)
     subprocess.run("tmux kill-sess -t " + service, shell=True)

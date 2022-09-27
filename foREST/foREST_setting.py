@@ -56,12 +56,11 @@ class foRESTSetting:
 
     @staticmethod
     def Instance():
-        if not foRESTSetting.__instance:
-            raise Exception("foREST setting not yet initialized.")
         return foRESTSetting.__instance
 
     def __init__(self, args_dicts: dict):
         # ip of service under testing
+        self._out_put = Argument('out_put', args_dicts, ['out_put'])
         self._target_ip = Argument('target_ip', args_dicts, ['target_ip'])
         # testing time budget: minutes
         self._time_budget = Argument('time_budget', args_dicts, ['time_budget'])
@@ -104,6 +103,10 @@ class foRESTSetting:
             raise Exception("use annotation key table need annotation_key_table path")
         if self.annotation_table and not self.annotation_table_file_path:
             raise Exception("use annotation table need annotation_table path")
+
+    @property
+    def out_put(self):
+        return self._out_put.value
 
     @property
     def similarity_cardinality(self):

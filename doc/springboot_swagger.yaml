@@ -7,7 +7,7 @@ info:
   termsOfService: Terms of service based into company terms of use
   contact:
     name: yourCompany
-    email: test@test.com
+    email: test.py@test.py.com
   license:
     name: License of API for YourCompany use only
 host: localhost:8080

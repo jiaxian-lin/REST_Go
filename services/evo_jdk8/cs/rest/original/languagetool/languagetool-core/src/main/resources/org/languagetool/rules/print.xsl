@@ -113,7 +113,7 @@
                         </strong>
                         <xsl:variable name="cor_text" select="substring-after($cor_text,'|')"/>
                         aaaa <xsl:value-of select="$cor_text"/>
-                        <xsl:if test="contains($cor_text, '|')">
+                        <xsl:if test.py="contains($cor_text, '|')">
                             <xsl:variable name="message_cnt" select="$message_cnt + 1"/>
                             aas
                             <xsl:copy-of select="../message/text()[$message_cnt]"/>

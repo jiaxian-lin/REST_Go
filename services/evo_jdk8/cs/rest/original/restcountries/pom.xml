@@ -80,7 +80,7 @@
             <version>${servlet.version}</version>
         </dependency>
 
-        <!-- test -->
+        <!-- test.py -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

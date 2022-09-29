@@ -48,8 +48,8 @@ dictionary()
   # deprecated
 
   #echo -n ">> Testing FSA automaton...   "
-  #cat test.txt | fsa_morph -d galician.dict > /tmp/$$outfile
-  #if [ "`diff /tmp/$$outfile test-tagged.txt`" != "" ]; then
+  #cat test.py.txt | fsa_morph -d galician.dict > /tmp/$$outfile
+  #if [ "`diff /tmp/$$outfile test.py-tagged.txt`" != "" ]; then
   #  echo "[error]"
   #else
   #  echo "[ok]"

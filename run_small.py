@@ -31,12 +31,12 @@ def blackbox(swagger, port):
             subprocess.run("cd services/" + service + " && java -jar ../../RestTestGen/RestTestGen.jar", shell=True)
         elif tool == "bboxrt":
             run = "java -jar bBOXRT/target/REST_API_Robustness_Tester-1.0.jar"
-            api_file = " --api-file bBOXRT/src/main/java/test.java"
+            api_file = " --api-file bBOXRT/src/main/java/test.py.java"
             yaml_file = " --api-yaml-file " + swagger
             subprocess.run(run + api_file + yaml_file, shell=True)
         elif tool == "restest":
             run = "cd RESTest && java -jar target/restest-full.jar"
-            api_file = " src/test/resources/" + service + "/api.properties"
+            api_file = " src/test.py/resources/" + service + "/api.properties"
             subprocess.run(run + api_file, shell=True)
         elif tool == "schemathesis":
             run = "schemathesis run " + swagger
@@ -44,9 +44,9 @@ def blackbox(swagger, port):
             subprocess.run(run + options, shell=True)
         elif tool == "tcases":
             subprocess.run("rm -rf ./tcases_" + service, shell=True)
-            subprocess.run("./tcases/bin/tcases-api-test -o tcases_" + service + "/src/test/java/tcases -p tcases -u 5000 -S " + swagger, shell=True)
+            subprocess.run("./tcases/bin/tcases-api-test.py -o tcases_" + service + "/src/test.py/java/tcases -p tcases -u 5000 -S " + swagger, shell=True)
             subprocess.run("cp pom.xml ./tcases_" + service, shell=True)
-            subprocess.run("cd tcases_" + service + " && mvn clean test", shell=True)
+            subprocess.run("cd tcases_" + service + " && mvn clean test.py", shell=True)
         elif tool == "apifuzzer":
             subprocess.run("APIFuzzer -s " + swagger + " -u http://localhost:" + str(port), shell=True)
 

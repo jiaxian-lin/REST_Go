@@ -108,11 +108,11 @@ class OpenApiServerFuzzer(ServerFuzzer):
 
     def _test_environment(self):
         """
-        Checks the test environment - not used
+        Checks the test.py environment - not used
         """
         sequence = self.model.get_sequence()
         try:
             if self._run_sequence(sequence):
-                self.logger.info('Environment test failed')
+                self.logger.info('Environment test.py failed')
         except Exception:
-            self.logger.info('Environment test failed')
+            self.logger.info('Environment test.py failed')

@@ -7,7 +7,7 @@ def run_service(service_path, class_name):
     with open(service_path + "/cp.txt", 'r') as f:
         cp = f.read()
     with open(service_path + "/run.sh", 'w') as f:
-        f.write("java -Djdk.attach.allowAttachSelf=true " + cov + " -cp target/classes:target/test-classes:" + cp + ' ' + class_name + " > " + base + "/log_" + cov_port + ".txt")
+        f.write("java -Djdk.attach.allowAttachSelf=true " + cov + " -cp target/classes:target/test.py-classes:" + cp + ' ' + class_name + " > " + base + "/log_" + cov_port + ".txt")
     if name == "cwa-verification" or name == "market" or name == "project-tracking-system":
         subprocess.run(". ./java11.env && cd " + service_path + " && tmux new-session -d -s " + name + " 'sudo sh run.sh'", shell=True)
     else:
@@ -54,7 +54,7 @@ if __name__ == "__main__":
             time.sleep(30)
             run_service("./services/jdk8/person-controller", "org.evo.EMDriver")
         elif name == "problem-controller":
-            subprocess.run("sudo docker run -d -p 3307:3306 --name mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=test mysql", shell=True)
+            subprocess.run("sudo docker run -d -p 3307:3306 --name mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=test.py mysql", shell=True)
             time.sleep(30)
             run_service("./services/jdk8/problem-controller", "org.evo.EMDriver")
         elif name == "rest-study":
@@ -103,7 +103,7 @@ if __name__ == "__main__":
             time.sleep(30)
             subprocess.run("tmux new -d -s person-controller '. java8.env && java " + cov + " -jar ./services/jdk8/person-controller/target/java-spring-boot-mongodb-starter-1.0.0.jar" + " > " + base + "/log_" + cov_port + ".txt'", shell=True)
         elif name == "problem-controller":
-            subprocess.run("sudo docker run -d -p 3307:3306 --name mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=test mysql", shell=True)
+            subprocess.run("sudo docker run -d -p 3307:3306 --name mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=test.py mysql", shell=True)
             time.sleep(30)
             subprocess.run("tmux new -d -s problem-controller '. java8.env && java " + cov + " -jar ./services/jdk8/problem-controller/target/project-api-0.0.1.jar" + " > " + base + "/log_" + cov_port + ".txt'", shell=True)
         elif name == "rest-study":
@@ -111,7 +111,7 @@ if __name__ == "__main__":
         elif name == "spring-batch-rest":
             subprocess.run("tmux new -d -s spring-batch-rest '. java8.env && java " + cov + " -jar ./services/jdk8/spring-batch-rest/example/api/target/spring-batch-rest-example-core-1.5.1.jar" + " > " + base + "/log_" + cov_port + ".txt'", shell=True)
         elif name == "spring-boot-sample-app":
-            run_service("./services/jdk8/spring-boot-sample-app", "com.test.sampleapp.Application")
+            run_service("./services/jdk8/spring-boot-sample-app", "com.test.py.sampleapp.Application")
         elif name == "user-management":
             subprocess.run("sudo docker run -d -p 3306:3306 --name mysqldb -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=users mysql", shell=True)
             time.sleep(30)

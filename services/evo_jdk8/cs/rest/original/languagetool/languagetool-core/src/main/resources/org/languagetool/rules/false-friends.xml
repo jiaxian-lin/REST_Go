@@ -14524,7 +14524,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
    <!--     XXX End of English false-friends list            XXX  -->
 
     <rulegroup id="DEMO_ENTRY">
-        <!-- for internal test cases only (FalseFriendRuleTest.java) -->
+        <!-- for internal test.py cases only (FalseFriendRuleTest.java) -->
         <rule>
             <pattern lang="en-GB">
                 <token>forDemoOnly</token>

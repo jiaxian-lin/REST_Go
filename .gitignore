@@ -23,7 +23,7 @@ cp.txt
 *.log
 log_*
 evomaster-benchmark-cs-rest-artificial-news.iml
-evomaster.jar
+evomaster-1.4/evomaster.jar
 RestTestGen.jar
 workloadResultsFile.xlsx
 faultloadResultsFile.xlsx

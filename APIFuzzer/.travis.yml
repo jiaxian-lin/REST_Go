@@ -11,18 +11,18 @@ python:
 #  - "nightly"  # nightly build
 before_script:
   - export PYTHONPATH=$PYTHONPATH:$(pwd)
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
+  - curl -L https://codeclimate.com/downloads/test.py-reporter/test.py-reporter-latest-linux-amd64 > ./cc-test.py-reporter
+  - chmod +x ./cc-test.py-reporter
 before_install:
   - sudo apt-get -y install libgnutls28-dev
 install:
   - pip3 install -r requirements.txt
 script:
   - ./APIFuzzer -h
-  - pip3 install -r test/requirements_for_test.txt
-  - python3 test/test_application.py&
-  - pytest  -x --hypothesis-show-statistics --cov-report html --cov=apifuzzer  --html=pytest.html --self-contained-html --durations=10 --show-capture=stdout -vv -rP test
+  - pip3 install -r test.py/requirements_for_test.txt
+  - python3 test.py/test_application.py&
+  - pytest  -x --hypothesis-show-statistics --cov-report html --cov=apifuzzer  --html=pytest.html --self-contained-html --durations=10 --show-capture=stdout -vv -rP test.py
   - vulture --min-confidence 100 apifuzzer/ || true
 after_script:
   - coverage xml
-  - if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_PYTHON_VERSION" == "3.8" ]]; then ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT; fi
+  - if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_PYTHON_VERSION" == "3.8" ]]; then ./cc-test.py-reporter after-build --exit-code $TRAVIS_TEST_RESULT; fi

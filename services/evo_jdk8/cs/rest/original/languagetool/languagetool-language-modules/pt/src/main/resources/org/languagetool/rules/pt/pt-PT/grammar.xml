@@ -2251,7 +2251,7 @@ title="Easy editing stylesheet" ?>
       </rule>
     </rulegroup>
   </category>
-    <!-- TODO Temporary use only for minimum inconsistency. Regression test in pt-PT then move to pt-AO and pt-MZ. Change id back to CASING after moving.
+    <!-- TODO Temporary use only for minimum inconsistency. Regression test.py in pt-PT then move to pt-AO and pt-MZ. Change id back to CASING after moving.
  <category id='CASING_AO45' name='Capitalização' type='grammar'>
 
 

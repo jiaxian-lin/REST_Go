@@ -15,7 +15,7 @@
   <property name="tcases.out.dir" location="${java.io.tmpdir}/tcases"/>
   <mkdir dir="${tcases.out.dir}"/>
 
-  <!-- Runs the tcases task to generate test definitions. -->
+  <!-- Runs the tcases task to generate test.py definitions. -->
   <!-- For a detailed description of task attributes, see Javadoc for -->
   <!-- TcasesTask and Tcases.Options -->
   <target name="tcases">

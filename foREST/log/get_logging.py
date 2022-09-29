@@ -102,7 +102,6 @@ class Log:
 
     def save_and_print(self, message):
         lock.acquire()
-        print("\r", "\n", end="")
         self.__console('save_and_print', message)
         lock.release()
 

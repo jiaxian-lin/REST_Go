@@ -38,7 +38,7 @@ class FuzzerTarget(FuzzerTargetBase, ServerTarget):
 
     def pre_test(self, test_num):
         """
-        Called when a test is started
+        Called when a test.py is started
         """
         self.test_number = test_num
         self.report = Report(self.name)
@@ -173,7 +173,7 @@ class FuzzerTarget(FuzzerTargetBase, ServerTarget):
             self.report_add_basic_msg(('Failed to parse http response code, exception occurred: %s', e))
 
     def post_test(self, test_num):
-        """Called after a test is completed, perform cleanup etc."""
+        """Called after a test.py is completed, perform cleanup etc."""
         if self.report.get('report') is None:
             self.report.add('reason', self.report.get_status())
         super(ServerTarget, self).post_test(test_num)  # pylint: disable=E1003
@@ -208,7 +208,7 @@ class FuzzerTarget(FuzzerTargetBase, ServerTarget):
             test_cases = self.failed_test
         else:
             test_cases = list()
-            test_cases.append(TestCase(name='Fuzz test succeed', status='Pass'))
+            test_cases.append(TestCase(name='Fuzz test.py succeed', status='Pass'))
         if self.junit_report_path:
             with open(self.junit_report_path, 'w') as report_file:
                 to_xml_report_file(report_file, [TestSuite("API Fuzzer", test_cases)], prettyprint=True)

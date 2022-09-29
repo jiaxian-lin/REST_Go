@@ -8,7 +8,11 @@ def whitebox(port):
     timeout = time.time() + 60 * 60 * float(time_limit)
     while time.time() < timeout:
         subprocess.run("rm -rf " + service, shell=True)
-        subprocess.run("java -jar evomaster.jar --sutControllerPort " + str(port) + " --maxTime " + str(int(float(time_limit)*60)) + "m --outputFolder EvoMaster_whitebox/" + service, shell=True)
+        out = subprocess.run("java -jar evomaster.jar --sutControllerPort " + str(port) + " --maxTime " + str(int(float(time_limit)*60)) + "m --outputFolder EvoMaster_whitebox/" + service, shell=True,capture_output=True).stdout.decode()
+        subprocess.run("mkdir -p ./EvoMaster_whitebox/" + service, shell=True)
+        with open("./EvoMaster_whitebox/" + service + "/result.txt", "w") as f:
+            f.write(out)
+        time.sleep(5)
 
 
 def blackbox(swagger, port):
@@ -20,7 +24,10 @@ def blackbox(swagger, port):
             subprocess.run("rm -rf EvoMaster/" + service, shell=True)
             subprocess.run("mkdir EvoMaster/"+service, shell=True)
             tmp = "java -jar evomaster.jar --blackBox true --bbSwaggerUrl file://" + swagger + " --bbTargetUrl http://localhost:" + str(port) + " --outputFormat JAVA_JUNIT_4 --maxTime " + str(int(float(time_limit)*60)) + "m --outputFolder EvoMaster/" + service
-            subprocess.run(tmp, shell=True)
+            out = subprocess.run(tmp, shell=True,capture_output=True).stdout.decode()
+            with open("./EvoMaster/"+service+"/result.txt", "w") as f:
+                f.write(out)
+            time.sleep(5)
         elif tool == "restler":
             basedir = os.path.join(curdir, "restler_" + service)
             restler_home = os.path.join(curdir, "restler/restler_bin/restler/Restler.dll")
@@ -33,12 +40,12 @@ def blackbox(swagger, port):
             subprocess.run("cd services/" + service + " && java -jar ../../RestTestGen/RestTestGen.jar", shell=True)
         elif tool == "bboxrt":
             run = "java -jar bBOXRT/target/REST_API_Robustness_Tester-1.0.jar"
-            api_file = " --api-file bBOXRT/src/main/java/test.java"
+            api_file = " --api-file bBOXRT/src/main/java/test.py.java"
             yaml_file = " --api-yaml-file " + swagger
             subprocess.run(run + api_file + yaml_file, shell=True)
         elif tool == "restest":
             run = "cd RESTest && java -jar target/restest-full.jar"
-            api_file = " src/test/resources/" + service + "/api.properties"
+            api_file = " src/test.py/resources/" + service + "/api.properties"
             subprocess.run(run + api_file, shell=True)
         elif tool == "schemathesis":
             run = "schemathesis run " + swagger
@@ -46,13 +53,13 @@ def blackbox(swagger, port):
             subprocess.run(run + options, shell=True)
         elif tool == "tcases":
             subprocess.run("rm -rf ./tcases_" + service, shell=True)
-            subprocess.run("./tcases/bin/tcases-api-test -o tcases_" + service + "/src/test/java/tcases -p tcases -u 5000 -S " + swagger, shell=True)
+            subprocess.run("./tcases/bin/tcases-api-test.py -o tcases_" + service + "/src/test.py/java/tcases -p tcases -u 5000 -S " + swagger, shell=True)
             subprocess.run("cp pom.xml ./tcases_" + service, shell=True)
-            subprocess.run("cd tcases_" + service + " && mvn clean test", shell=True)
+            subprocess.run("cd tcases_" + service + " && mvn clean test.py", shell=True)
         elif tool == "apifuzzer":
             subprocess.run("APIFuzzer -s " + swagger + " -u http://localhost:" + str(port), shell=True)
         elif tool == "foREST":
-            cmod = r"python3 foREST/foREST.py --time_budget "+str(time_limit)+ " --api_file_path " + swagger + r" --settings_file foREST/setting.json --out_put " +service
+            cmod = r"./venv/bin/python3 foREST/foREST.py --time_budget "+str(time_limit)+ " --api_file_path " + swagger + r" --settings_file foREST/setting.json --out_put " +service
             subprocess.run(cmod, shell=True)
 
 if __name__ == "__main__":
@@ -126,7 +133,7 @@ if __name__ == "__main__":
     elif service == "restcountries":
         if tool == "evomaster-whitebox":
             whitebox(40106)
-        elif tool == "apifuzzer":
+        elif tool == "apifuzzer" or tool == "evomaster-blackbox":
             blackbox(os.path.join(curdir, "doc/restcountries_openapi.yaml"), "50106")
         else:
             blackbox(os.path.join(curdir, "doc/restcountries_openapi.yaml"), "50106/rest")

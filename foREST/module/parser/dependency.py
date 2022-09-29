@@ -43,7 +43,6 @@ class SetKeyValueDependency:
         self.compare_parent_relation = []
 
         self.not_reference_field = []
-        self.key_depend_api_list = []
         self.depended_field_list = []
         self.depended_field_path = []
 
@@ -57,8 +56,7 @@ class SetKeyValueDependency:
             for field_info in api_info.resp_param:
                 self.compare_field_info = field_info
                 self.depended_field_path = [api_info.api_id]
-                if self.find_depend_field(field_info) and api_info.api_id not in self.key_depend_api_list:
-                    self.key_depend_api_list.append(api_info.api_id)
+                self.find_depend_field(field_info)
             self.compare_parent_relation.pop()
 
     def find_depend_field(self, compare_field):
@@ -94,6 +92,7 @@ class SetKeyValueDependency:
                 depend_point = DependPoint(self.api_info_list[self.depended_field_path[0]], self.depended_field_path[1:],
                                        point)
                 self.base_field_info.depend_list.append(depend_point)
+            self.base_api_info.add_depend_api(self.compare_api_info.api_id)
             self.depended_field_path.pop()
             return True
         elif compare_field.field_type == 'dict':
@@ -137,14 +136,12 @@ class SetKeyValueDependency:
         """get every field dependency reference"""
         for api_info in self.api_info_list:
             self.base_api_info = api_info
-            self.key_depend_api_list = []
             if api_info.req_param:
                 # traverse every parameter
                 for req_field_info in api_info.req_param:
                     self.base_parent_relation.append(last_not_variable(api_info.path))
                     self.get_field_dependency(req_field_info)
                     self.base_parent_relation.pop()
-            api_info.key_depend_api_list = self.key_depend_api_list
         no_reference_log.save_json(self.not_reference_field)
         return self.api_info_list
 

@@ -560,7 +560,7 @@ USA
                 </example>
                 <example>گل‌چهره</example>
             </rule>
-            <!-- test fails because of whitespace
+            <!-- test.py fails because of whitespace
             <rule>
                 <pattern>
                     <token>بی</token>

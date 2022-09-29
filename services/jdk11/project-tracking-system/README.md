@@ -78,7 +78,7 @@ java -Dspring.profiles.active=dev -jar target/project-tracking-sys.jar
 - On Test :
 
 ```shell
-java -Dspring.profiles.active=test -jar target/project-tracking-sys.jar
+java -Dspring.profiles.active=test.py -jar target/project-tracking-sys.jar
 ```
 
 - On Test :

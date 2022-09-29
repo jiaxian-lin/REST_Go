@@ -10,5 +10,5 @@ jobs:
         uses: docker/build-push-action@v1.0.1
         with:
           repository: genomenexus/gn-spring-boot
-          # don't push, since this is a test
+          # don't push, since this is a test.py
           push: false

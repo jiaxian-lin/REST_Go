@@ -41,14 +41,14 @@ def get_requirements():
 setup_options = dict(
     name='APIFuzzer',
     version=__version__,
-    description='Fuzz test your application using Swagger or OpenAPI definition without coding',
+    description='Fuzz test.py your application using Swagger or OpenAPI definition without coding',
     long_description=get_readme(),
     long_description_content_type="text/markdown",
     author='Peter Kiss',
     author_email='peter.kiss@linuxadm.hu',
     url='https://github.com/KissPeter/APIFuzzer/',
     scripts=['APIFuzzer'],
-    packages=find_packages(exclude=["test"]),
+    packages=find_packages(exclude=["test.py"]),
     install_requires=get_requirements(),
     license="GNU General Public License v3.0",
     classifiers=[  # https://pypi.org/classifiers/
@@ -63,10 +63,10 @@ setup_options = dict(
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
     ],
-    keywords='Fuzz test, QA, Software Quality Assurance, Security testing, Swagger, OpenAPI',
+    keywords='Fuzz test.py, QA, Software Quality Assurance, Security testing, Swagger, OpenAPI',
     python_requires='>=3.6, <4',
     package_data={"apifuzzer": ['fuzzer_target/*.py']},
-    exclude_package_data={"test": ["*"]}
+    exclude_package_data={"test.py": ["*"]}
 )
 
 setup(**setup_options)

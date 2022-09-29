@@ -41,5 +41,5 @@ workflows:
 #workflows:
 #  maven_test:
 #    jobs:
-#      - maven/test:
+#      - maven/test.py:
 #          command: verify  org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dmaven.javadoc.skip=true -Dgpg.skip=true

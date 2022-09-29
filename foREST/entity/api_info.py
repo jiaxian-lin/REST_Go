@@ -11,6 +11,8 @@ class DependPoint:
         self._time = 0
         self.flag = None
 
+    def __repr__(self):
+        return self.api_info.identifier
     @property
     def api_info(self):
         return self._api_info
@@ -148,6 +150,10 @@ class APIInfo:
 
     def get_resp_param(self, path):
         return get_param(path, self.resp_param)
+
+    def add_depend_api(self, api_id):
+        if api_id not in self.key_depend_api_list:
+            self.key_depend_api_list.append(api_id)
 
 
 

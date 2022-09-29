@@ -14,7 +14,7 @@ class BaseTest:
     @classmethod
     def setup_class(cls):
         """
-        Setup test class at initialization
+        Setup test.py class at initialization
         """
         cls.tempfile = tempfile.NamedTemporaryFile().name
         cls.report_dir = tempfile.mkdtemp()
@@ -23,22 +23,22 @@ class BaseTest:
         cls.report_files = list()
         cls.test_app_url = "http://127.0.0.1:5000/"
         print(f'Setup_class with report dir: {cls.report_dir}')
-        if os.path.exists('test/test_api/openapi_v2.json'):
-            src_file = 'test/test_api/openapi_v2.json'
+        if os.path.exists('test.py/test_api/openapi_v2.json'):
+            src_file = 'test.py/test_api/openapi_v2.json'
         elif os.path.exists('./test_api/openapi_v2.json'):
             src_file = './test_api/openapi_v2.json'
         else:
-            print(f'Failed to find test file in {os.listdir()}')
+            print(f'Failed to find test.py file in {os.listdir()}')
             src_file = None
         with open(src_file, 'r') as f:
             cls.swagger = json.load(f)
 
-        if os.path.exists('test/test_api/openapi_v3.json'):
-            src_file = 'test/test_api/openapi_v3.json'
+        if os.path.exists('test.py/test_api/openapi_v3.json'):
+            src_file = 'test.py/test_api/openapi_v3.json'
         elif os.path.exists('./test_api/openapi_v3.json'):
             src_file = './test_api/openapi_v3.json'
         else:
-            print(f'Failed to find test file in {os.listdir()}')
+            print(f'Failed to find test.py file in {os.listdir()}')
             src_file = None
         with open(src_file, 'r') as f:
             cls.openapi = json.load(f)
@@ -48,8 +48,8 @@ class BaseTest:
 
     def teardown_method(self, method):
         """
-        Clears the report directory at the end of each test run
-        :param method: test method
+        Clears the report directory at the end of each test.py run
+        :param method: test.py method
         """
         print('Removing {} report files...'.format(len(self.report_files)))
         # for f in self.report_files:
@@ -58,7 +58,7 @@ class BaseTest:
 
     def query_last_call(self):
         """
-        Queries the test application and gets the details of the last call which sent by the fuzzer
+        Queries the test.py application and gets the details of the last call which sent by the fuzzer
         :return: dict
         """
         _resp = requests.get('{}{}'.format(self.test_app_url, 'last_call'), timeout=1)

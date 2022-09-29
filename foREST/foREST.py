@@ -66,7 +66,6 @@ if __name__ == "__main__":
 
     # start time monitor
     foREST_log.save_and_print("start testing")
-    time.sleep(1)
     foREST_monitor.create_time_monitor(foREST_settings.time_budget)
     foREST_monitor.start_time_monitor()
 

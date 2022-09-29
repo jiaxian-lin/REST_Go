@@ -27,4 +27,4 @@ build:
             idle_timeout: 10
 filter:
   excluded_paths:
-    - "test/"
+    - "test.py/"

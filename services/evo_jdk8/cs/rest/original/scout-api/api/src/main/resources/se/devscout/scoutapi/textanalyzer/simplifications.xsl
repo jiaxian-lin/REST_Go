@@ -49,7 +49,7 @@
                         <xsl:sort select="@to"/>
                         <li><xsl:value-of select="@to"/>:
                             <!--<xsl:choose>-->
-                                <!--<xsl:when test="count(v) &gt; 5 or string-length(@to) &lt; 5">-->
+                                <!--<xsl:when test.py="count(v) &gt; 5 or string-length(@to) &lt; 5">-->
                                     <ul>
                                         <xsl:for-each select="v">
                                             <xsl:sort select="text()"/>

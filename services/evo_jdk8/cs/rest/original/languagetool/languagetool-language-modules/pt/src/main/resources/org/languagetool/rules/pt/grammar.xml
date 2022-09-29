@@ -12341,7 +12341,7 @@ MARCOAGPINTO 2020-02-18 -->
       <example correction="15:30 h">Às <marker>15:30 h.</marker> será a festa.</example>
       <example correction="5:30 h">Às <marker>5:30 h.</marker> será a festa.</example>
       <example>Chegará às 15:30 h.</example>
-    <!--example>Chegaram às 15 h. Eram de diferentes nacionalidades.</example--><!-- XXX This example works in practice but, it doesn't work in test rules. -->
+    <!--example>Chegaram às 15 h. Eram de diferentes nacionalidades.</example--><!-- XXX This example works in practice but, it doesn't work in test.py rules. -->
     </rule>
   </rulegroup>
 
@@ -28342,7 +28342,7 @@ TODO Write better examples
       <short>Erro tipográfico</short>
       <example correction='Trás-os|Trás — os'>Alfândega da Fé fica em <marker>Trás- os</marker>-Montes.</example>
       <example>-------------</example>
-    <!--example>— Quantos é que vocês são?— Treze.— Treze?— Sim, sim.</example> XXX Can't test \n SENT_START -->
+    <!--example>— Quantos é que vocês são?— Treze.— Treze?— Sim, sim.</example> XXX Can't test.py \n SENT_START -->
     </rule>
   </rulegroup>
 
@@ -36784,7 +36784,7 @@ TODO Write better examples
 
  <category id="CREATIVE_WRITING" name="Escrita Criativa" type="style" default='off'>
 
-  <rulegroup id='WEAK_WORDS' name='Escrita Criativa: Termos frágeis' default='off'> <!-- test on wikipedia and then disable -->
+  <rulegroup id='WEAK_WORDS' name='Escrita Criativa: Termos frágeis' default='off'> <!-- test.py on wikipedia and then disable -->
     <!--      Localized from vim-wordy by Tiago F. Santos, Portuguese rule, 2017-08-24      -->
       <url>https://pt.wikipedia.org/wiki/Vagueza</url>
       <short>Termo vago, fraco, impreciso, aborrecido ou prolixo</short>
@@ -36798,7 +36798,7 @@ TODO Write better examples
     </rule>
   </rulegroup>
 
-  <rulegroup id='BIASED_OPINION_WORDS' name='Escrita Criativa: Termos opinativos' default='off'> <!-- test on wikipedia and then disable -->
+  <rulegroup id='BIASED_OPINION_WORDS' name='Escrita Criativa: Termos opinativos' default='off'> <!-- test.py on wikipedia and then disable -->
     <!--      Localized from vim-wordy by Tiago F. Santos, Portuguese rule, 2017-08-23      -->
       <url>https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Palavras_a_evitar#Opini.C3.B5es</url>
       <short>Expressões opinativas</short>
@@ -36810,7 +36810,7 @@ TODO Write better examples
     </rule>
   </rulegroup>
 
-  <rulegroup id='PUFFERY' name='Escrita Criativa: Termos espalhafatosos ou propagandísticos' default='off'> <!-- test on wikipedia and then disable -->
+  <rulegroup id='PUFFERY' name='Escrita Criativa: Termos espalhafatosos ou propagandísticos' default='off'> <!-- test.py on wikipedia and then disable -->
     <!--      Localized from vim-wordy by Tiago F. Santos, Portuguese rule, 2017-08-23      -->
       <url>https://pt.wiktionary.org/wiki/espalhafato</url>
       <short>Termo espalhafatoso (“Puffery”)</short>

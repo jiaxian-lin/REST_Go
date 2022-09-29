@@ -51,8 +51,8 @@ categories:
   - title: '👷‍♀️ Testing, Configuration & Deployment'
     labels:
       - 'devops'
-      - 'test'
-      - 'cl-test'
+      - 'test.py'
+      - 'cl-test.py'
       - 'cl-devops'
   - title: '🧰 Maintenance'
     labels:
@@ -69,7 +69,7 @@ change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
 template: |
   ## Changes
   $CHANGES
-  
+
   ## 🕵️‍♀️ Full commit logs
-  
+
   - https://github.com/genome-nexus/genome-nexus/compare/$PREVIOUS_TAG...v$NEXT_PATCH_VERSION

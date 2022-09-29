@@ -98,13 +98,14 @@ class DictHandle:
         def find_by_path(data, path):
             if not path:
                 return data
+            if isinstance(data, dict) and path[0] == "dict":
+                return find_by_path(data, path[1:])
             if isinstance(data, dict) and path[0] in data:
                 return find_by_path(data[path[0]], path[1:])
             if isinstance(data, list) and path[0] == 'list':
-                for item in data:
-                    result = find_by_path(item, path[1:])
-                    if result:
-                        return result
+                result = find_by_path(random.choice(data), path[1:])
+                if result:
+                    return result
             return None
 
         return find_by_path(data, path)
@@ -205,7 +206,7 @@ def last_not_variable(_str: str):
     try:
         path = _str.split("/")
         for i in path[::-1]:
-            if not is_path_variable(i):
+            if not is_path_variable(i) and i:
                 return i
     except:
         return None

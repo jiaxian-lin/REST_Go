@@ -28,13 +28,13 @@ def random_str(slen=0):
     char = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
     symbol_ = "#!@$%^&*()_=+-"
     list_string = ["string", "long_string", "email:1@gmail.com", "%e6%99%ba%e8%83%bd%e5", "&#x6797;", r"\u01\u6D\u01\u6E\u01\u6F", r"\u01\u6", "",None]
+    if np.random.choice([1, 0], replace=True, p=[0.5, 0.5]):
+        return random.choice(list_string)
     seed = [number, char, symbol_]
     for j in seed:
         slen = random.randint(0, 5)
         for i in range(slen):
             ans.append(random.choice(j))
-    if np.random.choice([1, 0], replace=True, p=[0.5, 0.5]):
-        return random.choice(list_string)
     if np.random.choice([1, 0], replace=True, p=[0.5, 0.5]):
         random.shuffle(ans)
     return "".join(ans)

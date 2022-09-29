@@ -12,7 +12,7 @@
   //
   //////////////////////////////////////////////////////////////////////////////
   -->
-  <!-- Defines the schema for a system test case specification document -->
+  <!-- Defines the schema for a system test.py case specification document -->
   <!-- Version: 3.7.1  -->
 
   <!-- Annotations -->
@@ -21,7 +21,7 @@
     <xs:attribute name="value" type="xs:string" use="required"/>
   </xs:complexType>
 
-  <!-- System test cases -->
+  <!-- System test.py cases -->
   <xs:element name="TestCases">
     <xs:complexType>
       <xs:sequence maxOccurs="unbounded">

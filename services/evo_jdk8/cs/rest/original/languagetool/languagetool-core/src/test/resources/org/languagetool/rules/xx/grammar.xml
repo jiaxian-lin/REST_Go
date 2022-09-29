@@ -686,7 +686,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
             </pattern>
             <message>Incorrect expression. Whatever</message>
             <example>lah?</example>
-            <!-- cannot test this, as we get two rule matches here:
+            <!-- cannot test.py this, as we get two rule matches here:
                 <example correction=""><marker>Blah blah</marker> foo.</example>
             -->
             <example correction=""><marker>blah</marker></example>

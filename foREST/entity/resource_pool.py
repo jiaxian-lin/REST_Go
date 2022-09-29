@@ -1,5 +1,5 @@
 from entity.api_info import *
-from fuzzywuzzy import fuzz
+import copy
 from module.utils.utils import *
 # Stemming algorithm
 
@@ -65,6 +65,7 @@ class ResourcePool:
         self.resource_tree_dict = {}
         self.resource_id = 0
         self.build_resource_pool(api_list)
+        self.origin_resource_pool = None
         ResourcePool.__instance = self
 
     def build_resource_pool(self, api_list: List[APIInfo]):
@@ -74,6 +75,10 @@ class ResourcePool:
             if path not in self.resource_tree_dict:
                 self.resource_tree_dict[path] = {}
             self.resource_tree_dict[path][method] = self.resource_identifier_dict[api_info.identifier]
+        self.origin_resource_pool = copy.deepcopy(self.resource_identifier_dict)
+
+    def reset_resource_pool(self):
+        self.resource_identifier_dict = copy.deepcopy(self.resource_identifier_dict)
 
     def get_special_value_from_resource(self, api_identifier, field_path):
         resource = self.get_resource(api_identifier)

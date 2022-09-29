@@ -14,7 +14,7 @@ services = ["features-service", "languagetool", "ncs", "news", "ocvn", "proxypri
             "spring-batch-rest", "spring-boot-sample-app", "user-management", "cwa-verification", "market",
             "project-tracking-system"]
 tools = ["evomaster-whitebox_data", "restler_data", "resttestgen_data", "restest_data", "bboxrt_data", "schemathesis_data", "tcases_data", "dredd_data", "evomaster-blackbox_data", "apifuzzer_data"]
-class_name = ["app.coronawarn", "com.giassi.microservice", "com.test.sampleapp", "com.github.chrisgleissner", "org.restscs", "se.devscout.scoutapi", "com.in28minutes.rest.webservices.restfulwebservices", "eu.fayder.restcountries", "io.github.proxyprint.kitchen", "com.pfa.pack", "com.sw.project", "com.mongodb.starter", "org.devgateway", "org.tsdes.spring.examples.news", "org.restncs", "market", "org.languagetool", "org.cbioportal.genome_nexus", "org.javiermf.features", "io.blk.erc20"]
+class_name = ["app.coronawarn", "com.giassi.microservice", "com.test.py.sampleapp", "com.github.chrisgleissner", "org.restscs", "se.devscout.scoutapi", "com.in28minutes.rest.webservices.restfulwebservices", "eu.fayder.restcountries", "io.github.proxyprint.kitchen", "com.pfa.pack", "com.sw.project", "com.mongodb.starter", "org.devgateway", "org.tsdes.spring.examples.news", "org.restncs", "market", "org.languagetool", "org.cbioportal.genome_nexus", "org.javiermf.features", "io.blk.erc20"]
 
 paths = [
     "services/evo_jdk8/cs/rest/original/features-service",

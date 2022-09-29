@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-#  test.py
+#  test.py.py
 #   Convert a file which contains grammar rules into grammar xml format for LanguageTool
 #   The text file contains linguistic rules from book of "Guide of Commons errors" by Marwan Albawab
 # الملف معالج يدويا ومجهز للبرمجة

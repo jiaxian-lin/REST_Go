@@ -21,7 +21,7 @@ class TestSwagger(BaseTest):
             }
         }
         last_call = self.fuzz_swagger_and_get_last_call(api_path, api_def)
-        # last_call test field sample:
+        # last_call test.py field sample:
         # "req_path": "/path_param/\u001f/\u001c\u007f\u0000N@",
         last_value_sent = last_call['req_path'].replace(test_url, '')
         assert not isinstance(last_value_sent, int), last_value_sent
@@ -43,7 +43,7 @@ class TestSwagger(BaseTest):
                 ]
             }
         }
-        # last_call test field sample:
+        # last_call test.py field sample:
         # 'http://127.0.0.1:5000/query?integer_id=%10'
         last_call = self.fuzz_swagger_and_get_last_call(api_path, api_def)
         _, last_value_sent = last_call['req_url'].split("=")

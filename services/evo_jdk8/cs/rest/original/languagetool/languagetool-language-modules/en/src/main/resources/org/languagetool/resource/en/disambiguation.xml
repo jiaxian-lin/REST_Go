@@ -2643,7 +2643,7 @@ Incorrectly touched. <example type="untouched">Incorrect grammar. Those present 
                 <token regexp="yes">is|was</token>
                 <token postag_regexp="yes" postag="VBP?">take</token>
             </antipattern>
-            <antipattern><!-- Premium #1416. Passive: test was lead by -->
+            <antipattern><!-- Premium #1416. Passive: test.py was lead by -->
                 <token postag_regexp="yes" postag="NN(:UN?)?"/>
                 <token regexp="yes">i?s|was</token>
                 <token postag_regexp="yes" postag="VBP?"/>
@@ -3334,7 +3334,7 @@ Incorrectly touched. <example type="untouched">Incorrect grammar. Those present 
         <example type="ambiguous" inputform="model[model/JJ,model/NN,model/VB,model/VBP]" outputform="model[model/NN]">She is as beautiful a <marker>model</marker> as I have ever photographed.</example>
         <example type="ambiguous" inputform="delinquent[delinquent/JJ,delinquent/NN]" outputform="delinquent[delinquent/NN]">... contemplates the likelihood of his future son being a <marker>delinquent</marker> as he was, a prospect Alex views fatalistically.</example>
         <example type="ambiguous" inputform="flying[fly/VBG,flying/JJ,flying/NN:U]" outputform="flying[flying/NN:U]">Whether the effects will be that <marker>flying</marker> for most people is a thing of the past is yet to be seen.</example><!-- #2755 -->
-        <example type="untouched">If the <marker>community</marker> at the village fête are...</example><!-- test for #2405 -->
+        <example type="untouched">If the <marker>community</marker> at the village fête are...</example><!-- test.py for #2405 -->
         <example type="untouched">A short while later, Anders also went to sleep.</example>
         <example type="untouched">Incorrect grammar. The new method is much <marker>fast</marker> than the old method.</example>
         <example type="untouched">Incorrect grammar. The solution is not <marker>a simple as</marker> we had hoped.</example>
@@ -8740,7 +8740,7 @@ Incorrectly touched. <example type="untouched">Incorrect grammar. Those present 
         <example type="ambiguous" inputform="abstract[abstract/JJ,abstract/NN,abstract/VB,abstract/VBP]" outputform="abstract[abstract/VB,abstract/VBP]">... making its purpose difficult to <marker>abstract</marker> or quantify to any single concept.</example><!-- abstract/E-NP-singular, thus do not use the chunker in the pattern. -->
         <example type="ambiguous" inputform="control[control/NN:UN,control/VB,control/VBP]" outputform="control[control/VB,control/VBP]">It is not easy to check and <marker>control</marker> these decisions.</example>
         <example type="ambiguous" inputform="abstract[abstract/JJ,abstract/NN,abstract/VB,abstract/VBP]" outputform="abstract[abstract/VB,abstract/VBP]">Although to summarize and <marker>abstract</marker> the information is not easy...</example>
-        <example type="ambiguous" inputform="blue[blue/JJ,blue/NN:UN,blue/VB,blue/VBP]" outputform="blue[blue/VB,blue/VBP]">If you want to blacken or <marker>blue</marker> the metal, you must...</example><!-- black/B-NP-singular. Cannot do a test with 'black', thus use 'blacken' -->
+        <example type="ambiguous" inputform="blue[blue/JJ,blue/NN:UN,blue/VB,blue/VBP]" outputform="blue[blue/VB,blue/VBP]">If you want to blacken or <marker>blue</marker> the metal, you must...</example><!-- black/B-NP-singular. Cannot do a test.py with 'black', thus use 'blacken' -->
     </rule>
 
     <rule id="VBN_TO_VB_IN"  name="past participle + to + noun/verb > verb + preposition">
@@ -8809,7 +8809,7 @@ Incorrectly touched. <example type="untouched">Incorrect grammar. Those present 
         <disambig action="replace"><wd pos="NNP"/><wd pos="NNP"/></disambig>
     </rule>
 
-    <rule name="Proper noun: Conference of Specialised Ministers" id="CONFERENCE_OF_SPECIALISED_MINISTERS"><!-- www.coe.int/en/web/cm/iguide-chapter6. Used as a test in en-GB OXFORD_SPELLING_Z_NOT_S -->
+    <rule name="Proper noun: Conference of Specialised Ministers" id="CONFERENCE_OF_SPECIALISED_MINISTERS"><!-- www.coe.int/en/web/cm/iguide-chapter6. Used as a test.py in en-GB OXFORD_SPELLING_Z_NOT_S -->
       <pattern case_sensitive="yes">
         <token>Conference</token>
         <token>of</token>

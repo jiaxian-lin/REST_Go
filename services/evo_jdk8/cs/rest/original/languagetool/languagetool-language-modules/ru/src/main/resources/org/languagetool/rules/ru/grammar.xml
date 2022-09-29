@@ -9300,7 +9300,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
         </rulegroup>
 
         <rulegroup id="Verb_INF_OR_3P" default="on" name="Инфинитив вместо личной формы глагола">
-            <!-- need test on big data -->
+            <!-- need test.py on big data -->
         <rule>    
             <antipattern>
                 <token postag="VB:.*" postag_regexp="yes" skip="-1">
@@ -11596,7 +11596,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
             <example correction="">Они пошли к реке, по <marker>которой плавала лодка, которая</marker> была окрашена в белый цвет.</example>
         </rule>
         <rule default="on" id="O_KOTORIJ" name="Определения «который»">
-             <!-- need test rule -->
+             <!-- need test.py rule -->
             <antipattern>
                 <token skip="-1" postag="NN:.*:.*:.*:Nom" postag_regexp="yes" />
                 <token postag="NN:.*:PL:Nom" postag_regexp="yes">

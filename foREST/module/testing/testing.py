@@ -46,6 +46,7 @@ class TestingMonitor:
                         self.node_queue.append(child)
             self.traverse_nums += 1
             self.summery_count['already send rounds'] = self.traverse_nums
+        result_log.save_and_print(self.summery_count)
 
     def node_testing(self, node):
         exec_method_list = ['get', 'post', 'put', 'patch', 'delete']
@@ -191,7 +192,7 @@ class TestingMonitor:
             self.summery_count['5xx requests number'] += 1
             response_status = 5
             status_5xx_log.save(self.request_message + response_message)
-        summery_log.save_and_print(str(self.summery_count))
+        summery_log.save(str(self.summery_count))
         Monitor().time_monitor.message = f"Already send requests {self.summery_count['already send requests number']}, " \
                                          f"2xx requests number {self.summery_count['2xx requests number']}, " \
                                          f"success API number {self.summery_count['success api number']}"

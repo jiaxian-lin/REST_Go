@@ -72,3 +72,4 @@ if __name__ == "__main__":
     testing_monitor = TestingMonitor(api_list_parser().root)
     testing_monitor.foREST_tree_based_bfs()
     foREST_monitor.time_monitor.terminate()
+

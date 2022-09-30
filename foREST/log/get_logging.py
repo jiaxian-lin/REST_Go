@@ -98,7 +98,8 @@ class Log:
         lock.release()
 
     def save(self, message):
-        self.__console('save', message)
+       pass
+        # self.__console('save', message)
 
     def save_and_print(self, message):
         lock.acquire()
@@ -122,6 +123,7 @@ status_timeout_log = Log(log_name='timeout_request.txt')
 external_log = Log(log_name='hit_external_field.txt')
 inconsistent_parameter = Log(log_name='inconsistent_parameter.txt')
 no_reference_log = Log("no_reference_key.json")
+result_log = Log(log_name="result.txt")
 
 def set_out_put(path):
     foREST_log.out_put(path)
@@ -135,3 +137,4 @@ def set_out_put(path):
     external_log.out_put(path)
     no_reference_log.out_put(path)
     inconsistent_parameter.out_put(path)
+    result_log.out_put(path)

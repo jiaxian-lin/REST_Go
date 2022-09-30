@@ -7,13 +7,16 @@ import subprocess
 def whitebox(port):
     timeout = time.time() + 60 * 60 * float(time_limit)
     while time.time() < timeout:
-        subprocess.run("rm -rf " + service, shell=True)
-        out = subprocess.run("java -jar evomaster.jar --sutControllerPort " + str(port) + " --maxTime " + str(int(float(time_limit)*60)) + "m --outputFolder EvoMaster_whitebox/" + service, shell=True,capture_output=True).stdout.decode()
-        subprocess.run("mkdir -p ./EvoMaster_whitebox/" + service, shell=True)
-        with open("./EvoMaster_whitebox/" + service + "/result.txt", "w") as f:
-            f.write(out)
-        time.sleep(5)
-
+        try:
+            out = subprocess.run("java -jar evomaster.jar --sutControllerPort " + str(port) + " --maxTime " + str(int(float(time_limit)*60)) + "m --outputFolder EvoMaster_whitebox/" + service, shell=True,capture_output=True).stdout.decode()
+            subprocess.run("mkdir -p ./"+tool+"/"+service, shell=True)
+            time.sleep(5)
+            with open("./"+tool+"/"+service + "/result.txt", "w") as f:
+                f.write(out)
+            print(out)
+            time.sleep(5)
+        except Exception as e:
+            print(e)
 
 def blackbox(swagger, port):
     timeout = time.time() + 60 * 60 * float(time_limit)
@@ -21,11 +24,11 @@ def blackbox(swagger, port):
         if tool == "dredd":
             subprocess.run("dredd " + swagger + ' http://localhost:' + str(port), shell=True)
         elif tool == "evomaster-blackbox":
-            subprocess.run("rm -rf EvoMaster/" + service, shell=True)
-            subprocess.run("mkdir EvoMaster/"+service, shell=True)
-            tmp = "java -jar evomaster.jar --blackBox true --bbSwaggerUrl file://" + swagger + " --bbTargetUrl http://localhost:" + str(port) + " --outputFormat JAVA_JUNIT_4 --maxTime " + str(int(float(time_limit)*60)) + "m --outputFolder EvoMaster/" + service
+            subprocess.run("rm -rf " +"./"+tool+"/"+service, shell=True)
+            subprocess.run(f"mkdir -p {tool}/{service}", shell=True)
+            tmp = "java -jar evomaster.jar --blackBox true --bbSwaggerUrl file://" + swagger + " --bbTargetUrl http://localhost:" + str(port) + " --outputFormat JAVA_JUNIT_4 --maxTime " + str(int(float(time_limit)*60)) + "m --outputFolder "+tool+"/" + service
             out = subprocess.run(tmp, shell=True,capture_output=True).stdout.decode()
-            with open("./EvoMaster/"+service+"/result.txt", "w") as f:
+            with open("./"+tool+"/"+service+"/result.txt", "w") as f:
                 f.write(out)
             time.sleep(5)
         elif tool == "restler":

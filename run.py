@@ -23,13 +23,13 @@ if __name__ == "__main__":
                 print("Running " + tool + " for " + services[i] + ": " + str(cov_port))
                 session = tool + '_' + services[i]
                 cov_session = services[i] + "_cov"
-                subprocess.run("tmux new -d -s " + cov_session + " sh small_cov.sh " + str(cov_port), shell=True)
-                cmd = "tmux new -d -s " + session + " 'timeout " + time_limit + "h python3 run_tool.py " + tool + ' ' + services[i] + ' ' + str(cov_port) + " "+time_limit+ " '"
+                subprocess.run("tmux new -d -s " + cov_session + " sh get_cov.sh " + str(cov_port), shell=True)
+                cmd = "tmux new -d -s " + session + " 'python3 run_tool.py " + tool + ' ' + services[i] + ' ' + str(cov_port) + " "+time_limit+ " '"
                 subprocess.run(cmd, shell=True)
                 time.sleep(5)
 
-            time.sleep(float(time_limit)*60*60)
-
+            time.sleep(float(time_limit)*60*61)
+            time.sleep(60)
             subprocess.run("sh stop_all.sh", shell=True)
             for i in range(len(services)):
                 target_dir = f"experiment/{tool}/{current_time}/{services[i]}"
@@ -38,12 +38,12 @@ if __name__ == "__main__":
                 time.sleep(5)
                 subprocess.run(f"mv data/{services[i]}/res.csv {target_dir} -f", shell=True)
                 if tool == "evomaster-blackbox":
-                    subprocess.run(f"mv EvoMaster_blackbox/{services[i]}/result.txt {target_dir} -f", shell=True)
+                    subprocess.run(f"mv {tool}/{services[i]}/result.txt {target_dir} -f", shell=True)
                 elif tool == "evomaster-whitebox":
-                    subprocess.run(f"mv EvoMaster_whitebox/{services[i]}/result.txt {target_dir} -f", shell=True)
+                    subprocess.run(f"mv {tool}/{services[i]}/result.txt {target_dir} -f", shell=True)
                 elif tool == "foREST":
                     subprocess.run(f"mv foREST/log/{services[i]}/summer {target_dir} -f", shell=True)
                 subprocess.run("tmux kill-sess -t " + services[i], shell=True)
                 subprocess.run("tmux kill-sess -t " + services[i] + "_cov", shell=True)
                 subprocess.run("tmux kill-sess -t " + tool + '_' + services[i], shell=True)
-            time.sleep(60)
+            time.sleep(10)

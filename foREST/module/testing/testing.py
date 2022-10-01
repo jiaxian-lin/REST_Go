@@ -1,5 +1,6 @@
 import re
 import random
+from foREST_setting import foRESTSettings
 from module.testing.composerequest import ComposeRequest
 from log.get_logging import *
 from entity.resource_pool import resource_pool
@@ -46,7 +47,7 @@ class TestingMonitor:
                         self.node_queue.append(child)
             self.traverse_nums += 1
             self.summery_count['already send rounds'] = self.traverse_nums
-        result_log.save_and_print(self.summery_count)
+            result_log.save_and_print(self.summery_count)
 
     def node_testing(self, node):
         exec_method_list = ['get', 'post', 'put', 'patch', 'delete']

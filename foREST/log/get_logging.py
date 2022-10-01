@@ -98,7 +98,8 @@ class Log:
         lock.release()
 
     def save(self, message):
-        self.__console('save', message)
+        pass
+        # self.__console('save', message)
 
     def save_and_print(self, message):
         lock.acquire()

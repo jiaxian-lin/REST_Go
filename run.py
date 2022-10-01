@@ -26,7 +26,7 @@ if __name__ == "__main__":
                 time.sleep(5)
 
             time.sleep(float(time_limit)*60*61)
-            time.sleep(60)
+            time.sleep(120)
             subprocess.run("sh stop_all.sh", shell=True)
             for i in range(len(services)):
                 target_dir = f"experiment/{tool}/{current_time}/{services[i]}"
@@ -40,6 +40,8 @@ if __name__ == "__main__":
                     subprocess.run(f"mv {tool}/{services[i]}/result.txt {target_dir} -f", shell=True)
                 elif tool == "foREST":
                     subprocess.run(f"mv foREST/log/{services[i]}/result.txt {target_dir} -f", shell=True)
+                elif tool == "restler":
+                    subprocess.run(f"mv restler_{services[i]}/RestlerLogs/* {target_dir} -f", shell=True)
                 subprocess.run("tmux kill-sess -t " + services[i], shell=True)
                 subprocess.run("tmux kill-sess -t " + services[i] + "_cov", shell=True)
                 subprocess.run("tmux kill-sess -t " + tool + '_' + services[i], shell=True)

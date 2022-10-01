@@ -4,14 +4,11 @@ import sys
 if __name__ == "__main__":
     tool = sys.argv[1]
     total_time = sys.argv[2]
-    time_limit = "0.1"
-    services_0 = ["features-service", "languagetool", "ncs"]
-    services_1 = ["restcountries", "scout-api", "scs"]
-    services_2 = ["problem-controller", "rest-study","proxyprint",]
-    services_3 = ["cwa-verification", "market", "project-tracking-system"]
-    services_4 = ["restcountries", "person-controller", "spring-batch-rest"]
-    services_5 = ["news", "genome-nexus", "spring-boot-sample-app"]
-    server_list = [services_0, services_1, services_2, services_3, services_4, services_5]
+    time_limit = "1"
+    services_0 = ["features-service", "languagetool", "ncs","news", "genome-nexus","cwa-verification"]
+    services_1 = ["restcountries", "scout-api", "scs", "spring-boot-sample-app", "market"]
+    services_2 = [ "rest-study","proxyprint", "person-controller", "spring-batch-rest", "project-tracking-system"]
+    server_list = [services_0, services_1, services_2]
     subprocess.run("mkdir -p experiment/"+tool, shell=True)
     port_list = []
     base_cov_port = 11000
@@ -23,7 +20,7 @@ if __name__ == "__main__":
                 print("Running " + tool + " for " + services[i] + ": " + str(cov_port))
                 session = tool + '_' + services[i]
                 cov_session = services[i] + "_cov"
-                subprocess.run("tmux new -d -s " + cov_session + " sh small_cov.sh " + str(cov_port), shell=True)
+                subprocess.run("tmux new -d -s " + cov_session + " sh get_cov.sh " + str(cov_port), shell=True)
                 cmd = "tmux new -d -s " + session + " 'python3 run_tool.py " + tool + ' ' + services[i] + ' ' + str(cov_port) + " "+time_limit+ " '"
                 subprocess.run(cmd, shell=True)
                 time.sleep(5)

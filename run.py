@@ -39,7 +39,7 @@ if __name__ == "__main__":
                 elif tool == "evomaster-whitebox":
                     subprocess.run(f"mv {tool}/{services[i]}/result.txt {target_dir} -f", shell=True)
                 elif tool == "foREST":
-                    subprocess.run(f"mv foREST/log/{services[i]}/result.txt {target_dir} -f", shell=True)
+                    subprocess.run(f"mv foREST/log/{services[i]}/summery.txt {target_dir} -f", shell=True)
                 subprocess.run("tmux kill-sess -t " + services[i], shell=True)
                 subprocess.run("tmux kill-sess -t " + services[i] + "_cov", shell=True)
                 subprocess.run("tmux kill-sess -t " + tool + '_' + services[i], shell=True)
